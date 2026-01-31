@@ -1,0 +1,16 @@
+import requests
+from bs4 import BeautifulSoup
+
+url = "https://example.com"
+
+headers = {
+    "User-Agent": "Mozilla/5.0"
+}
+
+response = requests.get(url, headers=headers)
+html = response.text
+
+# Convert HTML → DOM tree
+soup = BeautifulSoup(html, "html.parser")
+
+print(soup.prettify())

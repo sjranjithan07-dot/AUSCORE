@@ -1,0 +1,13 @@
+import requests
+
+url = "https://example.com"
+
+headers = {
+    "User-Agent": "Mozilla/5.0 (compatible; WebScraperPro/1.0)"
+}
+
+response = requests.get(url, headers=headers)
+
+html_content = response.text
+
+print(html_content)  # RAW HTML SOURCE

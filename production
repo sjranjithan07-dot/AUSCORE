@@ -1,0 +1,30 @@
+from flask import Flask, request, jsonify
+import requests
+from bs4 import BeautifulSoup
+
+app = Flask(__name__)
+
+@app.route("/api/get-html", methods=["POST"])
+def get_html():
+    url = request.json.get("url")
+
+    if not url:
+        return jsonify({"error": "URL required"}), 400
+
+    headers = {
+        "User-Agent": "Mozilla/5.0 (WebScraperPro)"
+    }
+
+    response = requests.get(url, headers=headers, timeout=10)
+
+    html = response.text
+
+    return jsonify({
+        "success": True,
+        "html_length": len(html),
+        "html_preview": html[:1000]  # first 1000 chars
+    })
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
